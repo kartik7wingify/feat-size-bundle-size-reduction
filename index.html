@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VWO Personalize Test Page</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            padding: 24px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            margin-top: 12px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .hero {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        .hero h1 {
+            margin-top: 0;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        .btn:hover {
+            background: #1e40af;
+        }
+
+        .cards {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.08);
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green;
+        }
+
+        .highlight {
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2 id="site-title">VWO Personalize Demo</h2>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="?page=products">Products</a>
+        <a href="?page=pricing">Pricing</a>
+        <a href="?page=contact">Contact</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <section class="hero">
+
+        <h1 id="hero-title">
+            Welcome to the Demo Website
+        </h1>
+
+        <p id="hero-description">
+            This page is intended for testing VWO Personalize campaigns.
+        </p>
+
+        <button class="btn" id="primary-btn">
+            Get Started
+        </button>
+
+        <button class="btn" id="secondary-btn">
+            Learn More
+        </button>
+
+        <div id="message"></div>
+
+    </section>
+
+    <section class="cards">
+
+        <div class="card" id="card-1">
+            <h3>Feature One</h3>
+            <p>Simple content for DOM manipulation.</p>
+        </div>
+
+        <div class="card" id="card-2">
+            <h3>Feature Two</h3>
+            <p>Perfect for text replacement experiments.</p>
+        </div>
+
+        <div class="card" id="card-3">
+            <h3>Feature Three</h3>
+            <p>Add classes, hide, replace or move this card.</p>
+        </div>
+
+    </section>
+
+</div>
+
+<footer>
+    <span id="footer-text">
+        © 2026 Demo Site
+    </span>
+</footer>
+
+<script>
+
+window.demoData = {
+    loggedIn: false,
+    plan: "free",
+    country: "IN",
+    userType: "visitor"
+};
+
+window.dataLayer = window.dataLayer || [];
+
+document.getElementById("primary-btn").addEventListener("click", function () {
+
+    document.getElementById("message").innerHTML =
+        "Primary CTA clicked.";
+
+    window.dataLayer.push({
+        event: "primary_cta_click"
+    });
+
+    console.log("Primary CTA Click");
+});
+
+document.getElementById("secondary-btn").addEventListener("click", function () {
+
+    window.dataLayer.push({
+        event: "secondary_cta_click"
+    });
+
+    console.log("Secondary CTA Click");
+});
+
+setTimeout(function () {
+
+    const dynamic = document.createElement("div");
+
+    dynamic.id = "dynamic-banner";
+
+    dynamic.style.marginTop = "30px";
+
+    dynamic.style.padding = "20px";
+
+    dynamic.style.background = "#fde68a";
+
+    dynamic.innerHTML =
+        "<strong>Dynamic Banner</strong><br>This element appeared after 3 seconds.";
+
+    document.querySelector(".container").appendChild(dynamic);
+
+}, 3000);
+
+</script>
+
+</body>
+</html>
